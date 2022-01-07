@@ -15,7 +15,8 @@ class BrowserRouter extends React.Component {
     keyLength: PropTypes.number,
     children: PropTypes.node
   };
-
+// 在BrowserRouter中创建 history对象，在BrowserRouter中创建的是createBrowserHistory
+// BrowserHistory 和 HashHistory主要区别一个是监听事件不同，一个是改变url方式不同
   history = createHistory(this.props);
 
   componentWillMount() {
@@ -27,6 +28,7 @@ class BrowserRouter extends React.Component {
   }
 
   render() {
+    // 在 BrowserRouter中， 返回的是Router组件，其参数是 history对象，和BrowserRouter中包裹的children
     return <Router history={this.history} children={this.props.children} />;
   }
 }

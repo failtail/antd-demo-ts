@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import matchPath from "./matchPath";
 
-const isEmptyChildren = children => React.Children.count(children) === 0;
+const isEmptyChildren = (children) => React.Children.count(children) === 0;
 
 /**
  * The public API for matching a single path and rendering.
@@ -19,19 +19,19 @@ class Route extends React.Component {
     component: PropTypes.func,
     render: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    location: PropTypes.object
+    location: PropTypes.object,
   };
-// ：context进行传递数据时，必须在子级和父级都必须引入prop-types，在第一级父级中必须要有getChildContext函数和childContextTypes属性，其他子级中必须要有contextTypes属性，context的数据才能传递成功；不然无法传递
+  // ：context进行传递数据时，必须在子级和父级都必须引入prop-types，在第一级父级中必须要有getChildContext函数和childContextTypes属性，其他子级中必须要有contextTypes属性，context的数据才能传递成功；不然无法传递
   static contextTypes = {
     router: PropTypes.shape({
       history: PropTypes.object.isRequired,
       route: PropTypes.object.isRequired,
-      staticContext: PropTypes.object
-    })
+      staticContext: PropTypes.object,
+    }),
   };
 
   static childContextTypes = {
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
   };
 
   getChildContext() {
@@ -40,21 +40,21 @@ class Route extends React.Component {
         ...this.context.router,
         route: {
           location: this.props.location || this.context.router.route.location,
-          match: this.state.match
-        }
-      }
+          match: this.state.match,
+        },
+      },
     };
   }
 
   state = {
-    match: this.computeMatch(this.props, this.context.router)
+    match: this.computeMatch(this.props, this.context.router),
   };
 
   computeMatch(
     { computedMatch, location, path, strict, exact, sensitive },
     router
   ) {
-    if (computedMatch) return computedMatch; // <Switch> already computed the match for us
+    if (computedMatch) return computedMatch; // <Switch> already computed the match for us todo
 
     invariant(
       router,
@@ -104,7 +104,7 @@ class Route extends React.Component {
     );
 
     this.setState({
-      match: this.computeMatch(nextProps, nextContext.router)
+      match: this.computeMatch(nextProps, nextContext.router),
     });
   }
 

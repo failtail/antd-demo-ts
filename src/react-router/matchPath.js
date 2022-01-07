@@ -42,16 +42,15 @@ const matchPath = (pathname, options = {}, parent) => {
 
   if (exact && !isExact) return null;
 
-  const AA =  {
+  return {
     path, // the path pattern used to match
     url: path === "/" && url === "" ? "/" : url, // the matched portion of the URL
     isExact, // whether or not we matched exactly
     params: keys.reduce((memo, key, index) => {
       memo[key.name] = values[index];
       return memo;
-    }, {})
+    }, {}),
   };
-  return AA
 };
 
 export default matchPath;

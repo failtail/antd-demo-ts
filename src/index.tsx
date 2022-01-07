@@ -8,6 +8,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      {/* 所以这样写或报错  bundle.js:1519 Uncaught Invariant Violation: A <Router> may have only one child element*/}
+      {/* <div>hh</div> */}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
